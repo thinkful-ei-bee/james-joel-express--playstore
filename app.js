@@ -10,7 +10,8 @@ app.listen(8000, () => {
 })
 
 app.get('/', (req, res) => {
-  res.send('Hello Express');
+  //res.send('Hello Express');
+  res.send(playstore);
 })
 
 app.get('/apps', (req, res) => {
@@ -59,9 +60,7 @@ app.get('/apps', (req, res) => {
       if(playstore[i].Genres.includes(genreFixed))
       sorted.push(playstore[i]);
     }
-    
+    res.send(sorted);
   }
-
-  res.send(playstore); 
   
 });
