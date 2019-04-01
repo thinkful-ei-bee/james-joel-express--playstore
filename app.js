@@ -15,6 +15,9 @@ app.get('/', (req, res) => {
 
 app.get('/apps', (req, res) => {
   let sortBy = req.query.sort;
+  let genres = req.query.genres;
+  let acceptableGenres = ['Action', 'Puzzle', 'Strategy', 'Casual', 'Arcade', 'Card'];
+  let sorted = [];
 
   if(sortBy) {
     if(sortBy === 'rating') {
@@ -33,9 +36,22 @@ app.get('/apps', (req, res) => {
         return 0;
       })
     }
+    
     else {
-      return res.status(400).send('Please sort by either "rating" or "app"');
+      return res.status(400).send('Please filter by one of these:  "rating" or "app"');
     }
+  }
+
+  if(genres) {
+    
+    if(!acceptableGenres.includes(genres)) {
+      return res.status(400).send('Please filter by one of these: "Action, Puzzle, Strategy, Casual, Arcade, Card"');
+    }
+
+    sorted = playstore.map(app => {
+      app.Category
+    })
+    console.log(genres)
   }
 
   // if(!a) {
