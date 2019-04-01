@@ -20,18 +20,20 @@ app.get('/apps', (req, res) => {
 
   if(req.query.sort) {
     sortBy = req.query.sort;
-    if(sortBy !== 'rating' || sortBy !== 'app') {
+    if(sortBy === 'rating') {
+      response = 'Sort by: ' + sortBy;
+    }
+    else if(sortBy === 'app') {
+      response = 'Sort by: ' + sortBy;
+    }
+    else {
       return res.status(400).send('Please sort by either "rating" or "app"');
     }
   }
 
-  if(req.query.genres) {
-    genres = req.query.genres;
-  }
-    
   // if(!a) {
   //   return res.status(400).send('Please provide the "a" variable');
   // }
 
-  res.send(playstore); 
+  res.send(response); 
 });
