@@ -29,7 +29,6 @@ app.get('/apps', (req, res) => {
       })
     }
     else if(sortBy === 'app') {
-      //response = 'Sort by: ' + sortBy;
       playstore.sort((a, b) => {
         if(a.App < b.App) { return -1; }
         if(a.App > b.App) { return 1; }
@@ -44,14 +43,13 @@ app.get('/apps', (req, res) => {
 
   if(genres) {
     let genreCheck = genres.toLowerCase();
-    // let capitalizeFirst = genreCheck[0].toUpperCase();
-    // let restOfWord = genreCheck.substr(1, genreCheck.length);
     let genreFixed = genreCheck[0].toUpperCase() + genreCheck.substr(1, genreCheck.length);
-    // console.log(genreFixed);
+    
     if(!acceptableGenres.includes(genreFixed)){
       return res.status(400).send('Please filter by one of these: "Action, Puzzle, Strategy, Casual, Arcade, Card"');
     }
 
+    // Better to get this working instead of temp for loop below ..
     // playstore.filter(app => {
     //   console.log(`app.Genres: ${app.Genres}; genreFixed: ${genreFixed}`);
     //   app.Genres.includes(genreFixed);
@@ -61,9 +59,9 @@ app.get('/apps', (req, res) => {
       if(playstore[i].Genres.includes(genreFixed))
       sorted.push(playstore[i]);
     }
-    // console.log(playstore);
     
   }
 
-  res.send(sorted); 
+  res.send(playstore); 
+  
 });
