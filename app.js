@@ -14,14 +14,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/apps', (req, res) => {
-  let sortBy;
-  let genres;
-  let response;
+  let sortBy = req.query.sort;
 
-  if(req.query.sort) {
-    sortBy = req.query.sort;
+  if(sortBy) {
+    
     if(sortBy === 'rating') {
-      response = 'Sort by: ' + sortBy;
+      console.log('hi from rating')
 
     }
     else if(sortBy === 'app') {
