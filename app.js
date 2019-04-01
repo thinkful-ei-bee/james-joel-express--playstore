@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 app.get('/apps', (req, res) => {
   let sortBy = req.query.sort;
   let genres = req.query.genres;
-  let acceptableGenres = ['Action', 'Puzzle', 'Strategy', 'Casual', 'Arcade', 'Card'];
+  let acceptableGenres = ['Game','Action', 'Puzzle', 'Strategy', 'Casual', 'Arcade', 'Card'];
   let sorted = [];
 
   if(sortBy) {
@@ -43,20 +43,21 @@ app.get('/apps', (req, res) => {
   }
 
   if(genres) {
-    
-    if(!acceptableGenres.includes(genres)) {
+    let genreCheck = genres.toLowerCase();
+    // let capitalizeFirst = genreCheck[0].toUpperCase();
+    // let restOfWord = genreCheck.substr(1, genreCheck.length);
+    let genreFixed = genreCheck[0].toUpperCase() + genreCheck.substr(1, genreCheck.length);
+    // console.log(genreFixed);
+    if(!acceptableGenres.includes(genreFixed)){
       return res.status(400).send('Please filter by one of these: "Action, Puzzle, Strategy, Casual, Arcade, Card"');
     }
 
-    sorted = playstore.map(app => {
-      app.Category
-    })
-    console.log(genres)
+    sorted = playstore.filter(app => {
+      console.log(`app.Genres: ${app.Genres}; genreFixed: ${genreFixed}`);
+      app.Genres === genreFixed;
+    });
+    
   }
 
-  // if(!a) {
-  //   return res.status(400).send('Please provide the "a" variable');
-  // }
-
-  res.send(playstore); 
+  res.send(sorted); 
 });
