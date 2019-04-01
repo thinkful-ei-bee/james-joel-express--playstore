@@ -52,10 +52,16 @@ app.get('/apps', (req, res) => {
       return res.status(400).send('Please filter by one of these: "Action, Puzzle, Strategy, Casual, Arcade, Card"');
     }
 
-    sorted = playstore.filter(app => {
-      console.log(`app.Genres: ${app.Genres}; genreFixed: ${genreFixed}`);
-      app.Genres === genreFixed;
-    });
+    // playstore.filter(app => {
+    //   console.log(`app.Genres: ${app.Genres}; genreFixed: ${genreFixed}`);
+    //   app.Genres.includes(genreFixed);
+    // });
+
+    for (let i = 0; i < playstore.length; i++) {
+      if(playstore[i].Genres.includes(genreFixed))
+      sorted.push(playstore[i]);
+    }
+    // console.log(playstore);
     
   }
 
