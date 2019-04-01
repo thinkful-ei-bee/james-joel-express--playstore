@@ -22,9 +22,15 @@ app.get('/apps', (req, res) => {
     sortBy = req.query.sort;
     if(sortBy === 'rating') {
       response = 'Sort by: ' + sortBy;
+
     }
     else if(sortBy === 'app') {
-      response = 'Sort by: ' + sortBy;
+      //response = 'Sort by: ' + sortBy;
+      playstore.sort((a, b) => {
+        if(a.App < b.App) { return -1; }
+        if(a.App > b.App) { return 1; }
+        return 0;
+      })
     }
     else {
       return res.status(400).send('Please sort by either "rating" or "app"');
@@ -35,5 +41,5 @@ app.get('/apps', (req, res) => {
   //   return res.status(400).send('Please provide the "a" variable');
   // }
 
-  res.send(response); 
+  res.send(playstore); 
 });
