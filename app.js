@@ -17,10 +17,13 @@ app.get('/apps', (req, res) => {
   let sortBy = req.query.sort;
 
   if(sortBy) {
-    
     if(sortBy === 'rating') {
       console.log('hi from rating')
-
+      playstore.sort((a, b) => {
+        if(a.Rating < b.Rating) { return -1; }
+        if(a.Rating > b.Rating) { return 1; }
+        return 0;
+      })
     }
     else if(sortBy === 'app') {
       //response = 'Sort by: ' + sortBy;
